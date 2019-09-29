@@ -1,0 +1,11 @@
+{'repeatCount': 0, 'pauseOnFail': False, 'count': 10, 'description': '', 'minVerCode': 1, 'screenWidth': 1600, 'screenHeight': 2455, 'screenDpi': 2.5}
+{'type': '滑动', 'duration': 500, 'delay': 10, 'defaultUnit': 0, 'repeatCount': 4, 'startPos': {'type': 'location', 'x': '29%', 'y': '65%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}, 'endPos': {'type': 'location', 'x': '73%', 'y': '51%', 'xOffset': '0-10dp', 'yOffset': '0-10dp'}}
+{'type': '滑动', 'duration': 500, 'delay': 10, 'defaultUnit': 0, 'repeatCount': 1, 'startPos': {'type': 'location', 'x': '29%', 'y': '50%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}, 'endPos': {'type': 'location', 'x': '73%', 'y': '36%', 'xOffset': '0-10dp', 'yOffset': '0-10dp'}}
+{'type': '滑动', 'duration': 500, 'delay': 10, 'defaultUnit': 0, 'repeatCount': 4, 'startPos': {'type': 'location', 'x': '29%', 'y': '65%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}, 'endPos': {'type': 'location', 'x': '73%', 'y': '51%', 'xOffset': '0-10dp', 'yOffset': '0-10dp'}}
+{'type': '滑动', 'duration': 500, 'delay': 10, 'defaultUnit': 0, 'repeatCount': 1, 'startPos': {'type': 'location', 'x': '29%', 'y': '50%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}, 'endPos': {'type': 'location', 'x': '73%', 'y': '36%', 'xOffset': '0-10dp', 'yOffset': '0-10dp'}}
+{'type': '滑动', 'duration': 500, 'delay': 10, 'defaultUnit': 0, 'repeatCount': 1, 'startPos': {'type': 'location', 'x': '29%', 'y': '37%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}, 'endPos': {'type': 'location', 'x': '73%', 'y': '23%', 'xOffset': '0-10dp', 'yOffset': '0-10dp'}}
+{'type': '控制执行', 'delay': 0, 'delayUnit': 0, 'condition': {'type': 'random', 'percent': 80}, 'controlRunType': 'jumpTo', 'jumpToPosition': '1'}
+{'type': '点击', 'duration': 50, 'delay': 10, 'defaultUnit': 0, 'posData': {'type': 'location', 'x': '93%', 'y': '61%'}}
+{'type': '点击', 'duration': 50, 'delay': 10, 'defaultUnit': 0, 'posData': {'type': 'location', 'x': '29%', 'y': '37%', 'xOffset': '-10-0dp', 'yOffset': '-10-0dp'}}
+{'type': '点击', 'duration': 50, 'delay': 10, 'defaultUnit': 0, 'posData': {'type': 'location', 'x': '77%', 'y': '96%'}}
+{'type': '点击', 'duration': 50, 'delay': 10, 'defaultUnit': 0, 'posData': {'type': 'location', 'x': '93%', 'y': '61%'}}
