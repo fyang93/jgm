@@ -46,7 +46,7 @@ def img_to_base64(path):
     return escaped
 
 
-def collect_goods(duration=800, delay=10):
+def collect_goods(duration=1000, delay=10):
     imgs = os.listdir("imgs")
     for filename in imgs:
         building = os.path.splitext(filename)[0]
