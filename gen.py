@@ -22,15 +22,13 @@ building_positions = {1: {"type": "location", "x": "29%", "y": "37%", "xOffset":
                       8: {"type": "location", "x": "51%", "y": "58%"},
                       9: {"type": "location", "x": "73%", "y": "51%", "xOffset": "10dp", "yOffset": "10dp"}}
 other_positions = {'edit': {"type": "location", "x": "93%", "y": "61%"},
-                   'level_up': {"type": "location", "x": "77%", "y": "96%"}}
+                   'level_up': {"type": "location", "x": "77%", "y": "96%"},
+                   'ok': {"type": "location", "x": "50%", "y": "78%"},
+                   'home': {"type": "location", "x": "18%", "y": "98%"}}
 
-# genres = {'木材厂': '工业', '食品厂': '工业', '造纸厂': '工业', '电厂': '工业', '钢铁厂': '工业', '水厂': '工业', '企鹅机械': '工业', '纺织厂': '工业', '零件厂': '工业', '人民石油': '工业',
-#           '便利店': '商业', '学校': '商业', '菜市场': '商业', '服装店': '商业', '五金店': '商业', '图书城': '商业', '商贸中心': '商业', '加油站': '商业', '民食斋': '商业', '媒体之声': '商业',
-#           '木屋': '住宅', '居民楼': '住宅', '平房': '住宅', '钢结构房': '住宅', '小型公寓': '住宅', '人才公寓': '住宅', '花园洋房': '住宅', '中式小楼': '住宅', '空中别墅': '住宅', '复兴公馆': '住宅'}
-settings = {'钢铁厂': 1, '食品厂': 2, '电厂': 3,
-            '便利店': 4, '民食斋': 5, '菜市场': 6,
-            '钢结构房': 7, '人才公寓': 8, '居民楼': 9}
-
+settings = {'纺织厂': 1, '食品厂': 2, '电厂': 3,
+            '便利店': 4, '服装店': 5, '菜市场': 6,
+            '居民楼': 7, '人才公寓': 8, '中式小楼': 9}
 
 def get_img_size(path):
     with Image.open(path) as img:
@@ -46,7 +44,7 @@ def img_to_base64(path):
     return escaped
 
 
-def collect_goods(duration=1000, delay=10):
+def collect_goods(duration=1000, delay=0):
     imgs = os.listdir("imgs")
     for filename in imgs:
         building = os.path.splitext(filename)[0]
@@ -74,7 +72,7 @@ def collect_coins(i_start, i_end, repeats=1, duration=500, delay=10):
     actions.append(str(action))
 
 
-def level_up(i, duration=50, delay=10):
+def level_up(i, duration=50, delay=100):
     action = {"type": "点击", "duration": duration,
               "delay": delay, "defaultUnit": 0, "posData": other_positions['edit']}
     actions.append(str(action))
@@ -89,14 +87,14 @@ def level_up(i, duration=50, delay=10):
     actions.append(str(action))
 
 
-def jump_to_top_random(chance):
+def jump_to_top_by_chance(chance):
     condition = {"type": "random", "percent": chance}
     action = {"type": "控制执行", "delay": 0, "delayUnit": 0, "condition": condition,
               "controlRunType": "jumpTo", "jumpToPosition": "1"}
     actions.append(str(action))
 
 
-def jump_to_top():
+def jump_to_top_for_train():
     w, h = get_img_size('train.png')
     data = img_to_base64('train.png')
     img_data = {"data": data, "imageWidth": w, "imageHeight": h}
@@ -109,21 +107,41 @@ def jump_to_top():
     actions.append(str(action))
 
 
+def close_dialog():
+    w, h = get_img_size('ok.png')
+    data = img_to_base64('ok.png')
+    img_data = {"data": data, "imageWidth": w, "imageHeight": h}
+    img_data.update(device_info)
+    condition = {"type": "image", "imageData": img_data,
+                 "limitArea": "43.751415% 75.76282% 55.376415% 80.447136%",
+                 "searchMode": "COLOR", "minSimilarPercent": 70, "codeVersion": "V1_7"}
+    action = {"type": "点击", "duration": 50, "delay": 100, "defaultUnit": 0,
+              "posData": other_positions['ok'], "condition": condition}
+    actions.append(action)
+
+
+def back_to_home():
+    action = {"type": "点击", "duration": 50,
+              "delay": 100, "defaultUnit": 0, "posData": other_positions['home']}
+    actions.append(str(action))
+
 logger = logging.getLogger()
 fh = logging.FileHandler('script.zjs', mode='w')
 logger.setLevel(logging.INFO)
 logger.addHandler(fh)
 
 # --- actions ---
-collect_goods()         # 收货
-jump_to_top()           # 检查列车是否开走
-collect_coins(7, 9, 4)  # 收集住宅金币x4
-collect_coins(4, 6)     # 收集商业金币x1
-collect_coins(7, 9, 4)  # 收集住宅金币x4
-collect_coins(4, 6)     # 收集商业金币x1
-collect_coins(1, 3)     # 收集工业金币x1
-jump_to_top_random(80)  # 以20%概率升级建筑
-level_up(1)             # 升级建筑
+back_to_home()              # 回到首页
+collect_goods()             # 收货
+jump_to_top_for_train()     # 检查列车是否开走
+close_dialog()              # 关闭对话框
+collect_coins(7, 9, 4)      # 收集住宅金币x4
+collect_coins(4, 6)         # 收集商业金币x1
+collect_coins(7, 9, 4)      # 收集住宅金币x4
+collect_coins(4, 6)         # 收集商业金币x1
+collect_coins(1, 3)         # 收集工业金币x1
+jump_to_top_by_chance(80)   # 以20%概率升级建筑
+level_up(1)                 # 升级建筑
 # ---------------
 
 header = {"repeatCount": 0, "pauseOnFail": False,
