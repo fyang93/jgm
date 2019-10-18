@@ -26,9 +26,9 @@ other_positions = {'edit': {"type": "location", "x": "93%", "y": "61%"},
                    'ok': {"type": "location", "x": "50%", "y": "78%"},
                    'home': {"type": "location", "x": "18%", "y": "98%"}}
 
-settings = {'纺织厂': 1, '食品厂': 2, '电厂': 3,
-            '便利店': 4, '服装店': 5, '菜市场': 6,
-            '居民楼': 7, '人才公寓': 8, '中式小楼': 9}
+settings = {'零件厂': 1, '企鹅机械': 2, '电厂': 3,
+            '五金店': 4, '民食斋': 5, '媒体之声': 6,
+            '空中别墅': 7, '人才公寓': 8, '中式小楼': 9}
 
 def get_img_size(path):
     with Image.open(path) as img:
