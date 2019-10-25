@@ -59,7 +59,7 @@ def collect_goods(duration=1000, delay=0):
             img_data.update(device_info)
             condition = {"type": "image", "imageData": img_data,
                          "limitArea": area, "searchMode": "COLOR", "minSimilarPercent": 70, "codeVersion": "V1_7"}
-            action = {"type": "滑动", "duration": duration, "delay": delay, "defaultUnit": 0,
+            action = {"type": "滑动", "duration": duration, "delay": delay, "delayUnit": 0,
                       "repeatCount": 1, "condition": condition, "startPos": start, "endPos": end}
             actions.append(str(action))
 
@@ -67,23 +67,23 @@ def collect_goods(duration=1000, delay=0):
 def collect_coins(i_start, i_end, repeats=1, duration=500, delay=10):
     start = building_positions[i_start]
     end = building_positions[i_end]
-    action = {"type": "滑动", "duration": duration, "delay": delay, "defaultUnit": 0,
+    action = {"type": "滑动", "duration": duration, "delay": delay, "delayUnit": 0,
               "repeatCount": repeats, "startPos": start, "endPos": end}
     actions.append(str(action))
 
 
 def level_up(i, duration=50, delay=100):
     action = {"type": "点击", "duration": duration,
-              "delay": delay, "defaultUnit": 0, "posData": other_positions['edit']}
+              "delay": delay, "delayUnit": 0, "posData": other_positions['edit']}
     actions.append(str(action))
     action = {"type": "点击", "duration": duration,
-              "delay": delay, "defaultUnit": 0, "posData": building_positions[i]}
+              "delay": delay, "delayUnit": 0, "posData": building_positions[i]}
     actions.append(str(action))
     action = {"type": "点击", "duration": duration,
-              "delay": delay, "defaultUnit": 0, "posData": other_positions['level_up']}
+              "delay": delay, "delayUnit": 0, "posData": other_positions['level_up']}
     actions.append(str(action))
     action = {"type": "点击", "duration": duration,
-              "delay": delay, "defaultUnit": 0, "posData": other_positions['edit']}
+              "delay": delay, "delayUnit": 0, "posData": other_positions['edit']}
     actions.append(str(action))
 
 
@@ -94,13 +94,13 @@ def jump_to_top_by_chance(chance):
     actions.append(str(action))
 
 
-def jump_to_top_for_train():
-    w, h = get_img_size('train.png')
-    data = img_to_base64('train.png')
+def continue_if_no_train():
+    w, h = get_img_size('no_train.png')
+    data = img_to_base64('no_train.png')
     img_data = {"data": data, "imageWidth": w, "imageHeight": h}
     img_data.update(device_info)
-    condition = {"type": "image", "imageData": img_data,
-                 "limitArea": "44.0625% 89.4501% 58.5625% 94.09369%",
+    condition = {"type": "image", "runWhenFalse": True, "imageData": img_data,
+                 "limitArea": "44.0625% 86.42105% 58.499996% 92.65323%",
                  "searchMode": "COLOR", "minSimilarPercent": 70, "codeVersion": "V1_7"}
     action = {"type": "控制执行", "delay": 0, "delayUnit": 0, "condition": condition,
               "controlRunType": "jumpTo", "jumpToPosition": "1"}
@@ -115,14 +115,14 @@ def close_dialog():
     condition = {"type": "image", "imageData": img_data,
                  "limitArea": "43.751415% 75.76282% 55.376415% 80.447136%",
                  "searchMode": "COLOR", "minSimilarPercent": 70, "codeVersion": "V1_7"}
-    action = {"type": "点击", "duration": 50, "delay": 100, "defaultUnit": 0,
+    action = {"type": "点击", "duration": 50, "delay": 100, "delayUnit": 0,
               "posData": other_positions['ok'], "condition": condition}
     actions.append(action)
 
 
 def back_to_home():
     action = {"type": "点击", "duration": 50,
-              "delay": 100, "defaultUnit": 0, "posData": other_positions['home']}
+              "delay": 100, "delayUnit": 0, "posData": other_positions['home']}
     actions.append(str(action))
 
 logger = logging.getLogger()
@@ -133,7 +133,7 @@ logger.addHandler(fh)
 # --- actions ---
 back_to_home()              # 回到首页
 collect_goods()             # 收货
-jump_to_top_for_train()     # 检查列车是否开走
+continue_if_no_train()      # 检查列车是否开走
 close_dialog()              # 关闭对话框
 collect_coins(7, 9, 4)      # 收集住宅金币x4
 collect_coins(4, 6)         # 收集商业金币x1
