@@ -26,9 +26,12 @@ other_positions = {'edit': {"type": "location", "x": "93%", "y": "61%"},
                    'ok': {"type": "location", "x": "50%", "y": "78%"},
                    'home': {"type": "location", "x": "18%", "y": "98%"}}
 
-settings = {'零件厂': 1, '企鹅机械': 2, '电厂': 3,
-            '五金店': 4, '民食斋': 5, '媒体之声': 6,
-            '空中别墅': 7, '人才公寓': 8, '中式小楼': 9}
+# settings = {'零件厂': 1, '企鹅机械': 2, '电厂': 3,
+#             '五金店': 4, '民食斋': 5, '媒体之声': 6,
+#             '空中别墅': 7, '人才公寓': 8, '中式小楼': 9}
+settings = {'零件厂': 1, '企鹅机械': 2, '强国煤业': 3,
+            '商贸中心': 4, '民食斋': 5, '追梦快递': 6,
+            '复兴公馆': 7, '小型公寓': 8, '花园洋房': 9}
 
 def get_img_size(path):
     with Image.open(path) as img:
@@ -132,9 +135,9 @@ logger.addHandler(fh)
 
 # --- actions ---
 back_to_home()              # 回到首页
+close_dialog()              # 关闭对话框
 collect_goods()             # 收货
 continue_if_no_train()      # 检查列车是否开走
-close_dialog()              # 关闭对话框
 collect_coins(7, 9, 4)      # 收集住宅金币x4
 collect_coins(4, 6)         # 收集商业金币x1
 collect_coins(7, 9, 4)      # 收集住宅金币x4
